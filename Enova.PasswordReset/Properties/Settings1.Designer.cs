@@ -25,16 +25,6 @@ namespace Enova.PasswordReset.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("MYSTT-AGEMIT")]
-        public string DataSource {
-            get {
-                return ((string)(this["DataSource"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool PersistSecurityInfo {
             get {
                 return ((bool)(this["PersistSecurityInfo"]));
@@ -61,10 +51,18 @@ namespace Enova.PasswordReset.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool WindowsAuth {
             get {
                 return ((bool)(this["WindowsAuth"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string DataSource {
+            get {
+                return ((string)(this["DataSource"]));
             }
         }
     }
