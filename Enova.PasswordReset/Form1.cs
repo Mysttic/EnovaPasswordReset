@@ -23,8 +23,14 @@ namespace Enova.PasswordReset
         public static string dbGuid;        
         public static string opGuid;
         public static string newPass;
+        public string dataSource;
+        public string user;
+        public string password;
+        public bool windowsAuth;
+        public bool persistSecurityInfo;
 
-		private void btnLicz_Click(object sender, EventArgs e)
+
+        private void btnLicz_Click(object sender, EventArgs e)
 		{
 			try
 			{
@@ -68,11 +74,26 @@ namespace Enova.PasswordReset
 				return (char)(48 + v);
 			}
 			return (char)(65 + v - 10);
-		}        
+		}
         private void FrmPasswordReset_Load(object sender, EventArgs e)
         {
-            ComboBox cbx = comboBox1;
-            cbx.DataSource = GetDataBaseList();
+
+            dataSource = Properties.Settings1.Default.DataSource;
+            user = Properties.Settings1.Default.User;
+            password = Properties.Settings1.Default.Password;
+            windowsAuth = Properties.Settings1.Default.WindowsAuth;
+            persistSecurityInfo = Properties.Settings1.Default.PersistSecurityInfo;
+
+            DataSource.Text = dataSource;
+            if (windowsAuth == true)            
+                WindowsAuth.Checked = true;
+
+
+            if (!String.IsNullOrEmpty(dataSource))
+            {
+                ComboBox cbx = comboBox1;
+                cbx.DataSource = GetDataBaseList();
+            }
         }       
         
         public List<string> GetDataBaseList()
@@ -97,18 +118,24 @@ namespace Enova.PasswordReset
                     return x.CompareTo(y);
                 });
             }
-            catch { MessageBox.Show("Nie udało się zalogować do serwera"); }
+            catch
+            {
+                WAlabel.BackColor = Color.Red;
+                comboBox1.DataSource = null;
+                comboBox2.DataSource = null;
+                MessageBox.Show("Nie udało się zalogować do serwera");
+            }
             return list;
         }
         public SqlConnection getDBConnection(string DataBaseName)
-        {
-            string datasource = Properties.Settings1.Default.DataSource;
-            if (Properties.Settings1.Default.WindowsAuth)
+        {            
+            if (windowsAuth)
             {
-                WAlabel.BackColor = Color.Green;
+                
                 try
                 {
-                    SqlConnection conn = new SqlConnection(@"Data Source=" + datasource + ";Initial Catalog=" + DataBaseName + ";Integrated Security=True;");
+                    WAlabel.BackColor = Color.Green;
+                    SqlConnection conn = new SqlConnection(@"Data Source=" + dataSource + ";Initial Catalog=" + DataBaseName + ";Integrated Security=True;");
                     return conn;
                 }
                 catch { return null; }
@@ -117,11 +144,9 @@ namespace Enova.PasswordReset
             {
                 try
                 {
-                    
-                    bool security = Properties.Settings1.Default.PersistSecurityInfo;
-                    string user = Properties.Settings1.Default.User;
-                    string password = Properties.Settings1.Default.Password;
-                    SqlConnection conn = new SqlConnection(@"Data Source=" + datasource + ";Initial Catalog=" + DataBaseName + ";Persist Security Info=" + security + ";User ID=" + user + ";Password=" + password + "");
+                    WAlabel.BackColor = Color.Green;
+                    bool security = persistSecurityInfo;                                        
+                    SqlConnection conn = new SqlConnection(@"Data Source=" + dataSource + ";Initial Catalog=" + DataBaseName + ";Persist Security Info=" + security + ";User ID=" + user + ";Password=" + password + "");
                     return conn;
                 }
                 catch { return null; }
@@ -192,7 +217,53 @@ namespace Enova.PasswordReset
                 }
                 MessageBox.Show("Wykonano!");
             }
-            catch (Exception ex) { MessageBox.Show("Błąd!"+ex); }
+            catch (Exception ex) { MessageBox.Show("Błąd!\n"+ex); }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (!String.IsNullOrEmpty(dataSource))
+            {
+                ComboBox cbx = comboBox1;
+                cbx.DataSource = GetDataBaseList();
+            }            
+        }
+
+        private void WindowsAuth_CheckedChanged(object sender, EventArgs e)
+        {
+            if (WindowsAuth.Checked)
+            {                
+                User.Enabled = false;
+                Password.Enabled = false;                
+            }
+            else
+            {
+                User.Enabled = true;
+                Password.Enabled = true;
+                User.Text = user;
+                Password.Text = password;
+            }
+            windowsAuth = WindowsAuth.Checked;
+        }
+
+        private void DataSource_TextChanged(object sender, EventArgs e)
+        {
+            dataSource = DataSource.Text;
+        }
+
+        private void PersistSecurityInfo_CheckedChanged(object sender, EventArgs e)
+        {
+            persistSecurityInfo = PersistSecurityInfo.Checked;
+        }
+
+        private void User_TextChanged(object sender, EventArgs e)
+        {
+            user = User.Text;
+        }
+
+        private void Password_TextChanged(object sender, EventArgs e)
+        {
+            password = Password.Text;
         }
     }
 }
