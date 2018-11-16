@@ -8,10 +8,10 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("Enova.PasswordReset")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Agemit Sp z o.o.")]
+[assembly: AssemblyCompany("Agemit Sp. z o.o.")]
 [assembly: AssemblyProduct("Enova.PasswordReset")]
 [assembly: AssemblyCopyright("Copyright © Agemit 2018")]
-[assembly: AssemblyTrademark("")]
+[assembly: AssemblyTrademark("MD")]
 [assembly: AssemblyCulture("")]
 
 // Setting ComVisible to false makes the types in this assembly not visible 
