@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="DataSource" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">MYSTT-AGEMIT</Value>
+      <Value Profile="(Default)">DataSource</Value>
     </Setting>
     <Setting Name="PersistSecurityInfo" Type="System.Boolean" Scope="Application">
       <Value Profile="(Default)" />

@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("Enova.PasswordReset")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Enteo")]
+[assembly: AssemblyCompany("Agemit Sp z o.o.")]
 [assembly: AssemblyProduct("Enova.PasswordReset")]
-[assembly: AssemblyCopyright("Copyright © Enteo 2017")]
+[assembly: AssemblyCopyright("Copyright © Agemit 2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
