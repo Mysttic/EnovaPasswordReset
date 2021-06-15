@@ -1,0 +1,75 @@
+# .NET Desktop
+# Build and run tests for .NET Desktop or Windows classic desktop solutions.
+# Add steps that publish symbols, save build artifacts, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/apps/windows/dot-net
+
+trigger:
+- master
+
+pool:
+  vmImage: 'windows-latest'
+  demands:
+    - msbuild
+    - visualstudio
+
+variables:
+  solution: '**/*.sln'
+  buildPlatform: 'Any CPU'
+  buildConfiguration: 'Release'
+
+steps:
+- task: NuGetToolInstaller@1
+
+- task: NuGetCommand@2
+  inputs:
+    restoreSolution: '$(solution)'
+    
+- task: Assembly-Info-NetFramework@2
+  inputs:
+    FileNames: |
+      **\AssemblyInfo.cs
+      **\AssemblyInfo.vb
+      **\GlobalInfo.vb
+      **\GlobalInfo.cs
+      **/NetCoreLib.csproj
+      **/NetCoreConsoleApp.csproj
+      **/NetCoreWebApp.csproj
+    InsertAttributes: true
+    WriteBOM: true
+    Title: '$(Build.DefinitionName)'
+    Product: '$(Build.DefinitionName)'
+    Company: 'Agemit Sp. z o.o.'
+    Copyright: 'Copyright © $(date:DD MMMM YYYY) Agemit Sp. z o.o.'
+    Trademark: MD
+    VersionNumber: '$(date:YYMM).$(Build.BuildId).$(date:DD).$(date:HHmm)'
+    FileVersionNumber: '$(date:YYMM).$(Build.BuildId).$(date:DD).$(date:HHmm)'
+    InformationalVersion: '$(date:YYMM).$(Build.BuildId).$(date:DD).$(date:HHmm)'
+
+
+- task: VSBuild@1
+  inputs:
+    solution: '$(solution)'
+    platform: '$(buildPlatform)'
+    configuration: '$(buildConfiguration)'
+
+- task: PublishSymbols@2
+  displayName: 'Publish symbols path'
+  inputs:
+    SearchPattern: '**\bin\**\*.pdb'
+    PublishSymbols: false
+  continueOnError: true
+
+- task: CopyFiles@2
+  displayName: 'Copy Files to: $(build.artifactstagingdirectory)'
+  inputs:
+    SourceFolder: '$(system.defaultworkingdirectory)'
+    Contents: '**\$(Build.DefinitionName)\bin\Release\**'
+    TargetFolder: '$(build.artifactstagingdirectory)'
+  condition: succeededOrFailed()
+
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact: drop'
+  inputs:
+    PathtoPublish: '$(build.artifactstagingdirectory)'
+  condition: succeededOrFailed()
