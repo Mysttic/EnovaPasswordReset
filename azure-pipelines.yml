@@ -63,7 +63,10 @@ steps:
   displayName: 'Copy Files to: $(build.artifactstagingdirectory)'
   inputs:
     SourceFolder: '$(system.defaultworkingdirectory)'
-    Contents: '**\$(Build.DefinitionName)\obj\Release\**'
+    Contents: |
+      **\$(Build.DefinitionName)\obj\Release\**.exe
+      **\$(Build.DefinitionName)\obj\Release\**.exe.config
+      **\$(Build.DefinitionName)\obj\Release\**.pdb
     TargetFolder: '$(build.artifactstagingdirectory)'
   condition: succeededOrFailed()
 
