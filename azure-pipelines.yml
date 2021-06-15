@@ -55,7 +55,7 @@ steps:
 - task: PublishSymbols@2
   displayName: 'Publish symbols path'
   inputs:
-    SearchPattern: '**\bin\**\*.pdb'
+    SearchPattern: '**\obj\**\*.pdb'
     PublishSymbols: false
   continueOnError: true
 
@@ -63,7 +63,7 @@ steps:
   displayName: 'Copy Files to: $(build.artifactstagingdirectory)'
   inputs:
     SourceFolder: '$(system.defaultworkingdirectory)'
-    Contents: '**\$(Build.DefinitionName)\bin\Release\**'
+    Contents: '**\$(Build.DefinitionName)\obj\Release\**'
     TargetFolder: '$(build.artifactstagingdirectory)'
   condition: succeededOrFailed()
 
