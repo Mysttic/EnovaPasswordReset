@@ -64,9 +64,9 @@ steps:
   inputs:
     SourceFolder: '$(system.defaultworkingdirectory)'
     Contents: |
-      **\$(Build.DefinitionName)\obj\Release\**.exe
-      **\$(Build.DefinitionName)\obj\Release\**.config
-      **\$(Build.DefinitionName)\obj\Release\**.pdb
+      **\$(Build.DefinitionName)\$(Build.DefinitionName)**.exe
+      **\$(Build.DefinitionName)\$(Build.DefinitionName)**.config
+      **\$(Build.DefinitionName)\$(Build.DefinitionName)**.pdb
     TargetFolder: '$(build.artifactstagingdirectory)'
   condition: succeededOrFailed()
 
