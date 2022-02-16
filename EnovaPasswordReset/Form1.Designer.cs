@@ -1,4 +1,4 @@
-﻿namespace Enova.PasswordReset
+﻿namespace EnovaPasswordReset
 {
 	partial class FrmPasswordReset
 	{

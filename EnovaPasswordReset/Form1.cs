@@ -10,7 +10,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Windows.Forms;
 
-namespace Enova.PasswordReset
+namespace EnovaPasswordReset
 {
 	public partial class FrmPasswordReset : Form
 	{

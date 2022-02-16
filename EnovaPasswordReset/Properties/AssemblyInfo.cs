@@ -2,15 +2,20 @@
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
+#if RELEASE
+//[assembly: Obfuscation(Exclude = false, Feature = "preset(none);+anti ildasm;+anti tamper;+constants;+ctrl flow;+anti dump;+anti debug;+ref proxy;")]
+[assembly: Obfuscation(Exclude = false, Feature = "preset(none);+anti ildasm;+anti tamper;+constants;+ctrl flow;+anti dump;+anti debug;+ref proxy;+rename(mode=letters,flatten=false);")]
+#endif
+
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Enova.PasswordReset")]
+[assembly: AssemblyTitle("EnovaPasswordReset")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Agemit Sp. z o.o.")]
-[assembly: AssemblyProduct("Enova.PasswordReset")]
-[assembly: AssemblyCopyright("Copyright © Agemit 2018")]
+[assembly: AssemblyCompany("MystticSolutions")]
+[assembly: AssemblyProduct("EnovaPasswordReset")]
+[assembly: AssemblyCopyright("Copyright © Mysttic 2022")]
 [assembly: AssemblyTrademark("MD")]
 [assembly: AssemblyCulture("")]
 
