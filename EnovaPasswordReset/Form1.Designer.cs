@@ -247,7 +247,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "FrmPasswordReset";
-            this.Text = "Reseter haseł enova365";
+            this.Text = "EnovaPasswordReset";
             this.Load += new System.EventHandler(this.FrmPasswordReset_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
