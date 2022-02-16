@@ -3,7 +3,7 @@ The application allows you to reset the operator password in the selected enova 
 
 ![image](https://user-images.githubusercontent.com/19372942/154306069-82dd3471-fecb-49d7-bb31-741509f07c4b.png) 
 
-##How to use:
+## How to use:
 
 1. In the Instance field, enter the address of the server on which the database is located. You can load a list of local instances by clicking the Load button
 2. Complete the database access parameters (Is Windows authorization, PersistSecurityInfo required, or SQL user login details)
