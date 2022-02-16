@@ -13,5 +13,5 @@ The application allows you to reset the operator password in the selected enova 
 6. Clicking on the Execute button will change the password
 
 Additional info:
-- The enova program must be restarted for the password change to be visible
+- The enova program must be restarted for the change to be visible
 - In the additional *.config* file, you can enter the default access data that will be loaded when the program is started
