@@ -25,13 +25,13 @@ namespace Enova.PasswordReset
 		}
         private void FrmPasswordReset_Load(object sender, EventArgs e)
         {
-            InstanceCB.SelectedItem = Properties.Settings1.Default.DataSource;
+            InstanceCB.Text = Properties.Settings1.Default.DataSource;
             SQLUserTB.Text = Properties.Settings1.Default.User;
             SQLPasswordTB.Text = Properties.Settings1.Default.Password;
             WindowsAuthCB.Checked = Properties.Settings1.Default.WindowsAuth;
             SecurityCB.Checked = Properties.Settings1.Default.PersistSecurityInfo;
                         
-            if (InstanceCB.SelectedItem != null)
+            if (!String.IsNullOrEmpty(InstanceCB.Text))
                 DatabaseCB.DataSource = GetDataBaseList();
             
         }
@@ -57,9 +57,8 @@ namespace Enova.PasswordReset
         /// <param name="e"></param>
         private void RefreshBT_Click(object sender, EventArgs e)
         {
-            if(InstanceCB.SelectedItem != null)
-                if (!String.IsNullOrEmpty(InstanceCB.SelectedItem.ToString()))                
-                    DatabaseCB.DataSource = GetDataBaseList();                
+            if (!String.IsNullOrEmpty(InstanceCB.Text))                
+                DatabaseCB.DataSource = GetDataBaseList();                
         }
         /// <summary>
         /// Primary event that does the job
